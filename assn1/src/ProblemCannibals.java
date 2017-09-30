@@ -147,7 +147,10 @@ public class ProblemCannibals extends Problem {
 	
 	double step_cost(Object fromState, Object toState) { return 1; }
 
-	public double h(Object state) { return 0; }
+	public double h(Object state) {
+        StateCannibals theState = (StateCannibals) state;
+        return (theState.canArray[missL] + theState.canArray[cannL]);
+    }
 
 
 	public static void main(String[] args) throws Exception {
@@ -176,6 +179,15 @@ public class ProblemCannibals extends Problem {
 		System.out.println("IterativeDeepeningTreeSearch:\t" + search.IterativeDeepeningTreeSearch(new FrontierLIFO()));
 
 		System.out.println("IterativeDeepeningGraphSearch:\t" + search.IterativeDeepeningGraphSearch(new FrontierLIFO()));
-	
+
+        System.out.println("=== INFORMED SEARCHES ===\n");
+
+        System.out.println("AstarTreeSearch:\t\t" + search.AstarTreeSearch());
+
+		System.out.println("AstarGraphSearch:\t\t" + search.AstarGraphSearch());
+
+        System.out.println("GreedyBestFirstTreeSearch:\t" + search.GreedyBestFirstTreeSearch());
+
+		System.out.println("GreedyBestFirstGraphSearch:\t" + search.GreedyBestFirstGraphSearch());
 	}
 }

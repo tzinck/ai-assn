@@ -114,8 +114,10 @@ public class Search {
 			
 			Node node = frontier.remove();
 			
-			if( problem.goal_test(node.state) )
+			if( problem.goal_test(node.state) ) {
+				PrintTree(initialNode);
 				return Solution(node);
+			}
 			
 			frontier.insertAll(Expand(node,problem));
 			cnt++;
@@ -137,9 +139,11 @@ public class Search {
 				return null;
 			
 			Node node = frontier.remove();
-			
-			if( problem.goal_test(node.state) )
+
+			if( problem.goal_test(node.state) ) {
+				PrintTree(initialNode);
 				return Solution(node);
+			}
 			
 			if( !explored.contains(node.state) ) {
 				explored.add(node.state);
@@ -251,5 +255,17 @@ public class Search {
 			solution_str += solution.pop() + " ";
 		
 		return solution_str;
+	}
+
+	private void PrintTree(Node node) {
+		String out = "";
+		for(int i = 0; i < node.depth; i++) out += " ";
+		out += node.state + "(g=" +  node.path_cost + ", h=" + problem.h(node.state) + ", f=" + (node.path_cost + problem.h(node.state))+ ")";
+		out += node.order < 0 ? "" : " order=" + node.order;
+		System.out.println(out);
+		for (Node n : node_list){
+			if(n.parent_node == node)
+				PrintTree(n);
+		}
 	}
 }

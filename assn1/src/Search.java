@@ -31,8 +31,8 @@ public class Search {
 		return TreeSearch(new FrontierPriorityQueue(new ComparatorF(problem)));
 	}
 
-	public String DepthLimitedTreeSearch() {
-		return TreeSearchDepthLimited(new FrontierLIFO(), 4);
+	public String DepthLimitedTreeSearch(int depth) {
+		return TreeSearchDepthLimited(new FrontierLIFO(), depth);
 	}
 	
 	//Graph-search methods
@@ -56,8 +56,8 @@ public class Search {
 		return GraphSearch(new FrontierPriorityQueue(new ComparatorF(problem)));
 	}
 
-	public String DepthLimitedGraphSearch() {
-		return GraphSearchDepthLimited(new FrontierLIFO(), 4);
+	public String DepthLimitedGraphSearch(int depth) {
+		return GraphSearchDepthLimited(new FrontierLIFO(), depth);
 	}
 
 	

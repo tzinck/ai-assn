@@ -98,9 +98,9 @@ public class ProblemMap extends Problem {
 
 		System.out.println("AstarGraphSearch:\t\t" + search.AstarGraphSearch());
 
-		System.out.println("TreeSearchDepthLimited:\t\t" + search.DepthLimitedTreeSearch());
+		System.out.println("TreeSearchDepthLimited:\t\t" + search.DepthLimitedTreeSearch(4));
 
-		System.out.println("GraphSearchDepthLimited:\t" + search.DepthLimitedGraphSearch());
+		System.out.println("GraphSearchDepthLimited:\t" + search.DepthLimitedGraphSearch(4));
 
 		System.out.println("IterativeDeepeningTreeSearch:\t" + search.IterativeDeepeningTreeSearch(new FrontierLIFO()));
 

@@ -45,28 +45,40 @@ public class ProblemWaterJugs extends Problem {
 
         //  Pour the 8 into the 12
         successor_state = new StateWaterJugs(jug_state);
-        successor_state.jugArray[jug12] += 8;
-        successor_state.jugArray[jug8]  -= 8;
+        int amountToPour = 12 - successor_state.jugArray[jug12];
+        if (amountToPour > successor_state.jugArray[jug8]) {
+            amountToPour = successor_state.jugArray[jug8];
+        }
+        successor_state.jugArray[jug12] += amountToPour;
+        successor_state.jugArray[jug8]  -= amountToPour;
         successor_state.jugArray[jug3]  += 0;
         if (isValid(successor_state)) set.add(successor_state);
 
         //  Pour the 3 into the 12
         successor_state = new StateWaterJugs(jug_state);
-        successor_state.jugArray[jug12] += 3;
+        amountToPour = 12 - successor_state.jugArray[jug12];
+        if (amountToPour > successor_state.jugArray[jug3]) {
+            amountToPour = successor_state.jugArray[jug3];
+        }
+        successor_state.jugArray[jug12] += amountToPour;
         successor_state.jugArray[jug8]  += 0;
-        successor_state.jugArray[jug3]  -= 3;
+        successor_state.jugArray[jug3]  -= amountToPour;
         if (isValid(successor_state)) set.add(successor_state);
 
         //  Pour the 3 into the 8
         successor_state = new StateWaterJugs(jug_state);
+        amountToPour = 8 - successor_state.jugArray[jug8];
+        if (amountToPour > successor_state.jugArray[jug3]) {
+            amountToPour = successor_state.jugArray[jug3];
+        }
         successor_state.jugArray[jug12] += 0;
-        successor_state.jugArray[jug8]  += 3;
-        successor_state.jugArray[jug3]  -= 3;
+        successor_state.jugArray[jug8]  += amountToPour;
+        successor_state.jugArray[jug3]  -= amountToPour;
         if (isValid(successor_state)) set.add(successor_state);
 
         //  Pour the 12 into the 8
         successor_state = new StateWaterJugs(jug_state);
-        int amountToPour = 8 - successor_state.jugArray[jug8];
+        amountToPour = 8 - successor_state.jugArray[jug8];
         successor_state.jugArray[jug12] -= amountToPour;
         successor_state.jugArray[jug8]  += amountToPour;
         successor_state.jugArray[jug3]  += 0;
@@ -160,28 +172,20 @@ public class ProblemWaterJugs extends Problem {
 
 		System.out.println("BreadthFirstGraphSearch:\t" + search.BreadthFirstGraphSearch());
 
-        //System.out.println("DepthFirstTreeSearch:\t\t" + search.DepthFirstTreeSearch());
+        System.out.println("DepthFirstTreeSearch:\t\t" + search.DepthFirstTreeSearch());
 
-		//System.out.println("DepthFirstGraphSearch:\t\t" + search.DepthFirstGraphSearch());
+		System.out.println("DepthFirstGraphSearch:\t\t" + search.DepthFirstGraphSearch());
 
 		System.out.println("UniformCostTreeSearch:\t\t" + search.UniformCostTreeSearch());
 
 		System.out.println("UniformCostGraphSearch:\t\t" + search.UniformCostGraphSearch());
 
-		//System.out.println("GreedyBestFirstTreeSearch:\t" + search.GreedyBestFirstTreeSearch());
+		System.out.println("TreeSearchDepthLimited:\t\t" + search.DepthLimitedTreeSearch(4));
 
-		//System.out.println("GreedyBestFirstGraphSearch:\t" + search.GreedyBestFirstGraphSearch());
+		System.out.println("GraphSearchDepthLimited:\t" + search.DepthLimitedGraphSearch(4));
 
-		//System.out.println("AstarTreeSearch:\t\t" + search.AstarTreeSearch());
+		System.out.println("IterativeDeepeningTreeSearch:\t" + search.IterativeDeepeningTreeSearch(new FrontierLIFO()));
 
-		//System.out.println("AstarGraphSearch:\t\t" + search.AstarGraphSearch());
-
-		//System.out.println("TreeSearchDepthLimited:\t\t" + search.DepthLimitedTreeSearch());
-
-		//System.out.println("GraphSearchDepthLimited:\t" + search.DepthLimitedGraphSearch());
-
-		//System.out.println("IterativeDeepeningTreeSearch:\t" + search.IterativeDeepeningTreeSearch(new FrontierLIFO()));
-
-		//System.out.println("IterativeDeepeningGraphSearch:\t" + search.IterativeDeepeningGraphSearch(new FrontierLIFO()));
+		System.out.println("IterativeDeepeningGraphSearch:\t" + search.IterativeDeepeningGraphSearch(new FrontierLIFO()));
 	}
 }

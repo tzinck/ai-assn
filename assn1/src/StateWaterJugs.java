@@ -30,9 +30,9 @@ public class StateWaterJugs
 
     public String toString() {
         String ret = "";
-        ret += "\n12 Gallon: " + this.jugArray[0];
-        ret += "\n8 Gallon: " + this.jugArray[1];
-        ret += "\n3 Gallon: " + this.jugArray[2];
+        ret += "\n12 Gallon:\t" + this.jugArray[0];
+        ret += "\t8 Gallon:\t" + this.jugArray[1];
+        ret += "\t3 Gallon:\t" + this.jugArray[2];
 
         return ret;
     }

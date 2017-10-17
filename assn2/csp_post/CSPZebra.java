@@ -1,38 +1,89 @@
 public class CSPZebra extends CSP {
 
-    static final int yellow=0, water=0, norwegian=0, fox=0, kools=0;
-    static final int blue=1, tea=1, ukrainian=1, horse=1, chesterfield=1;
-    static final int red=2, milk=2, englishman=2, snails=2, oldgold=2;
-    static final int ivory=3, juice=3, spaniard=3, dog=3, luckystrike=3;
-    static final int green=4, coffee=4, japanese=4, zebra=4, parliament=4;
+    static Set<Object> varCol = new HashSet<Object>(
+        Arrays.asList(new String[]{"blue","green","ivory","red","yellow"}));
+
+    static Set<Object> varDri = new HashSet<Object>(
+        Arrays.asList(new String[]{"coffee","milk","orange-juice","tea","water"}));
+
+    static Set<Object> varNat = new HashSet<Object>(
+        Arrays.asList(new String[]{"englishman","japanese","norwegian","spaniard","ukranian"}));
+
+    static Set<Object> varPet = new HashSet<Object>(
+        Arrays.asList(new String[]{"dog","fox","horse","snails","zebra"}));
+
+    static Set<Object> varCig = new HashSet<Object>(
+        Arrays.asList(new String[]{"chesterfield","kools","lucky-strike","old-gold","parliament"}));
 
     public boolean isGood (Object X, Object Y, Object x, Object y) {
+        
+        if(!C.containsKey(X))
+            return true;
+
+        if(!C.get(X).contains(Y))
+            return true;
+
+        //  Englishman in the red house
+        if(X.equals("englishman") && Y.equals("red") && !x.equals(y))
+            return false;
+        
+        //  spaniard owns a dog
+
+        //  coffee in green house
+
+        //  ukranian drinks tea
+
+        //  green house to right of ivory house
+
+        //  oldgold smoker has snails
+
+        //  kools smoked in the yellow house
+
+        //  milk is drunk in the middle house
+
+        //  norweigan first house on the left
+
+        //  chesterfield smoker lives next to the fox owner
+
+        //  kools smoked in the house next to the house where the horse is
+
+        //  lucky strike smoker drinks orange juice
+
+        //  japanese man smokes parliament
+
+        //  norweigian lives next to the blue house
+
         return true;
     }
 
     public static void main(String[] args) throws Exception {
         CSPZebra csp = new CSPZebra();
 
-        Integer[] houses = {0, 1, 2, 3, 4};
-        Integer[] color = new Integer[5];
-        Integer[] nationality = new Integer[5];
-        Integer[] drink = new Integer[5];
-        Integer[] smoke = new Integer[5];
-        Integer[] pet = new Integer[5];
+        Integer[] dom = {1, 2, 3, 4, 5};
 
-        //  TODO: add the implicit constraints
-        //  each house has unique color
+        for(Object X: varCol)
+            csp.addDomain(X, dom);
 
-        //  each house has unique drink
+        for(Object X: varDri)
+            csp.addDomain(X, dom);
 
-        //  each house has unique pet
+        for(Object X: varNat)
+            csp.addDomain(X, dom);
+        
+        for(Object X: varPet)
+            csp.addDomain(X, dom);
 
-        //  each house has unique smoke
+        for(Object X: varCig)
+            csp.addDomain(X, dom);
 
-        //  each house has unique nationality
 
-        //  TODO: add the problem constraints somehow
-        //  englishman in red house
+        //  Add Unary Constraints
+
+
+        //  Binary Constraints
+
+        //  Englishman in the red house
+        csp.addBidirectionalArc("englishman", "red");
 
         //  spaniard owns a dog
 
@@ -60,22 +111,11 @@ public class CSPZebra extends CSP {
 
         //  norweigian lives next to the blue house
 
-        for(Object X : color)
-            csp.addDomain(X, houses);
-        
-        for(Object X : nationality)
-            csp.addDomain(X, houses);
 
-        for(Object X : drink)
-            csp.addDomain(X, houses);
-        
-        for(Object X : smoke)
-            csp.addDomain(X, houses);
+        //  Uniqueness Constraints
 
-        for(Object X : pet)
-            csp.addDomain(X, houses);
 
-        
+        //  Get the solution
         Search search = new Search(csp);
         System.out.println(search.BacktrackingSearch());
     }

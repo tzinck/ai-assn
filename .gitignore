@@ -3,3 +3,5 @@
 *.war
 .idea/*
 .vscode/*
+*.pickle
+*.ipynb_checkpoint*
